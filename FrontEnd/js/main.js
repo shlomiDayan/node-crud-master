@@ -1,9 +1,18 @@
 // we use axios to hit our api and get data
-axios.get('http://localhost:3000/getPosts')
+axios.get('http://localhost:3000/getPatients')
     .then((res) => {
         populateData(res.data);
     });
 
+    // send a POST request
+axios({
+    method: 'post',
+    url: 'http://localhost:3000/create',
+    data: {
+      firstName: 'Finn',
+      lastName: 'Williams'
+    }
+  });
 
 // render data 
 const populateData = (data) => {
@@ -12,6 +21,7 @@ const populateData = (data) => {
     let modals = "";
     if (data.length < 0) {
         return
+        console.log("data is empty")
     }
 
     for (let i = 0; i < data.length; i++) {
@@ -19,17 +29,35 @@ const populateData = (data) => {
               <div class="col-md-4 px-4">
                   <div class="card post_card">
                       <p class="label">
-                          Title
+                      First Name
                       </p>
                       <p class="">
-                          ${data[i].title}
+                          ${data[i].FirstName}
                       </p>
                       <p class="label mt-2">
-                          Description :
+                          Last Name :
                       </p>
                       <p>
-                          ${data[i].desc}
-                      </p>          
+                          ${data[i].LastName}
+                      </p>  
+                      <p class="label mt-2">
+                          Social ID :
+                      </p>
+                      <p>
+                          ${data[i].SocialID}
+                      </p>        
+                      <p class="label mt-2">
+                          Gender :
+                      </p>
+                      <p>
+                          ${data[i].Gender}
+                      </p>        
+                      <p class="label mt-2">
+                          Birthdate :
+                      </p>
+                      <p>
+                          ${data[i].BirthDate}
+                      </p>                
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_${data[i]._id}">
                          View More
                       </button>              

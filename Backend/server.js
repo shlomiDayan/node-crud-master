@@ -3,23 +3,20 @@
     DB Connection, port settings etc
 */
 
-const mongoose = require('mongoose');
 
-require('dotenv').config({ path: '.env' });
-
-// Database connection
-mongoose.connect('mongodb://127.0.0.1:27017/node_crud', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
+//Set up mongoose connection
+var mongoose = require('mongoose');
+var mongoDB = 'mongodb://127.0.0.1:27017/medicard';
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 mongoose.connection.on('error', (err) => {
     console.error(`Database Connection Error → ${err.message}`);
 });
 
-// require our models here so that it can be accessed throughtout the application
-require('./Models/Posts');
+require('dotenv').config({ path: '.env' });
+
+// patient schema model
+require('./Models/Patient');
 
 // require app.js
 const app = require('./app');

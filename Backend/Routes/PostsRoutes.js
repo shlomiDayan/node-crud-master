@@ -1,25 +1,25 @@
-const express = require('express');
-const router = express.Router(); 
+const express = require("express");
+const router = express.Router();
 
 // import the controller file for fcuntions
-const postController = require('../Controllers/PostController');
+const patientController = require("../Controllers/PatientController");
 
-// use 
-router.get('/', postController.baseRoute);
+// use
+router.get("/", patientController.baseRoute);
 
 // create
-router.post('/create', postController.createPost);
+router.post("/create", patientController.createPatient);
 
 // read all
-router.get('/getPosts', postController.getPosts);
+router.get("/getPatients", patientController.getPatients);
 
 // read one
-router.get('/getPost/:id', postController.getSinglePost);
+router.get("/getPatient/:id", patientController.getSinglePatient);
 
 // update
-router.put('/post/:id/update', postController.updatePost);
+router.put("/patient/:id/update", patientController.updatePatient);
 
 // delete
-router.delete('/delete/:id', postController.deletePost);
+router.delete("/delete/:id", patientController.deletePatient);
 
 module.exports = router;
