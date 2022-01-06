@@ -16,7 +16,8 @@ ReactDOM.render(
         <Route path="/" element={<Login />} />
         <Route path="backoffice" element={<Backoffice />} />
         <Route path="home" element={<Home />} />
-        <Route path="patient/:pid" element={<Patient />}></Route>
+        {/* <Route exact path="patient/:id" element={<Patient />} /> */}
+        <Route exact path="patient/:id" element={<Patient />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

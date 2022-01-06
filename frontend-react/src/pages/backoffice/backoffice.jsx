@@ -80,7 +80,7 @@ class Backoffice extends Component {
           <div className="row height d-flex">
             <div className="col-md-8">
               <div className="search">
-                <i className="fa fa-search"></i>
+                <i className="bi bi-search"></i>
                 <input
                   type="text"
                   className="form-control"

@@ -58,7 +58,7 @@ class Login extends React.Component {
                 <form id="login-form" name="form" onSubmit={this.handleSubmit}>
                   <div
                     className={
-                      "form-group" +
+                      "form-group  p-3" +
                       (submitted && !username ? " has-error" : "")
                     }
                   >
@@ -76,7 +76,7 @@ class Login extends React.Component {
                   </div>
                   <div
                     className={
-                      "form-group" +
+                      "form-group  p-3" +
                       (submitted && !password ? " has-error" : "")
                     }
                   >
@@ -92,7 +92,7 @@ class Login extends React.Component {
                       <div className="help-block">Password is required</div>
                     )}
                   </div>
-                  <div className="form-group">
+                  <div className="form-group text-center  p-3">
                     <input type="checkbox" name="rmCheckbox" id="rm-checkbox" />
                     <label htmlFor="rmCheckbox">Remember Me</label>
                   </div>
