@@ -32,6 +32,7 @@ class Patient extends React.Component {
   //good hook to fetch data
   // In class-based components the perfect place for data fetching is componentDidMount() lifecycle method.
   componentDidMount() {
+    document.title = document.title + " - Patient Card";
     let id = this.props.params.id;
     this.setState({ patientId: id });
     console.log("React :: lifecycle :: componentDidMount :: patientId = " + id);
@@ -46,10 +47,8 @@ class Patient extends React.Component {
 
     return (
       <div>
-        <h1>Get Patient by Id</h1>
-        <img alt="" src="./patient-mock.png"></img>
+        {/* <pre>{JSON.stringify(this.state.patient, null, "+")}</pre> */}
         <pre>{JSON.stringify(this.state.patient)}</pre>
-        {p ? <h1>{p.data.FirstName + " " + p.data.LastName}</h1> : null}
         <PatientCard patient={this.state.patient} />
       </div>
     );

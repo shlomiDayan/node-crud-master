@@ -94,7 +94,9 @@ class Login extends React.Component {
                   </div>
                   <div className="form-group text-center  p-3">
                     <input type="checkbox" name="rmCheckbox" id="rm-checkbox" />
-                    <label htmlFor="rmCheckbox">Remember Me</label>
+                    <label htmlFor="rmCheckbox" className="m-1">
+                      Remember Me
+                    </label>
                   </div>
                   <div className="form-group text-center">
                     <button className="btn btn-primary btn-login">Login</button>

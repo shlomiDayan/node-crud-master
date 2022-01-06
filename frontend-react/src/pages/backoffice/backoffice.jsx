@@ -63,6 +63,7 @@ class Backoffice extends Component {
   //good hook to fetch data
   // In class-based components the perfect place for data fetching is componentDidMount() lifecycle method.
   componentDidMount() {
+    document.title = document.title + " - Backoffice";
     console.log("React :: lifecycle :: componentDidMount");
     patientService.getPatients().then((res) => {
       let patients = res.data;
