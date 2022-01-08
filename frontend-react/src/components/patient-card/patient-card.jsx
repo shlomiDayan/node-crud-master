@@ -4,6 +4,7 @@ import { QRCode } from "react-qrcode-logo";
 
 const PatientCard = (props) => {
   if (props.patient) {
+    const frontendBaseUrl = "http://localhost:3001/";
     const {
       _id,
       FirstName,
@@ -79,7 +80,7 @@ const PatientCard = (props) => {
         </div>
         <div className="text-center mt-5">
           <h2>Scan Me</h2>
-          <QRCode size="150" value={"http://localhost:3001/patient/" + _id} />
+          <QRCode size="150" value={frontendBaseUrl + "/patient/" + _id} />
         </div>
       </div>
     );

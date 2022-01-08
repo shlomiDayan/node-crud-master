@@ -3,25 +3,31 @@
     DB Connection, port settings etc
 */
 
-
 //Set up mongoose connection
-var mongoose = require('mongoose');
-var mongoDB = 'mongodb://127.0.0.1:27017/medicard';
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
-mongoose.connection.on('error', (err) => {
-    console.error(`Database Connection Error → ${err.message}`);
+var mongoose = require("mongoose");
+//set up reference for the enviornment .env file
+require("dotenv").config({ path: ".env" });
+
+// Database connection
+mongoose.connect(process.env.DATABASE_CLOUD, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
 });
 
-require('dotenv').config({ path: '.env' });
-
-// patient schema model
-require('./Models/Patient');
+mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
+mongoose.connection.on("error", (err) => {
+  console.error(`Database Connection Error → ${err.message}`);
+});
 
 // require app.js
-const app = require('./app');
+const app = require("./app");
+
+// patient schema model
+require("./Models/Patient");
 
 // start the server on port 3000
 const server = app.listen(3000, () => {
-    console.log(`Express running → PORT ${server.address().port}`);
-})
+  console.log(
+    `Backend node.js Express running → PORT ${server.address().port}`
+  );
+});

@@ -4,15 +4,15 @@
     and supporting libraries
 */
 
-const express = require('express'); // import express
+const express = require("express"); // import express
 const app = express(); // initialise app with express
 
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 
 // Logger
-app.use(logger('dev'));
+app.use(logger("dev"));
 
 // body parsers
 app.use(bodyParser.json());
@@ -23,19 +23,25 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    }
-    next();
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+  next();
 });
 
 // import our routes
-const routes = require('./Routes/PostsRoutes');
+const patientRoutes = require("./Routes/PatientRoutes");
+const appRoutes = require("./Routes/AppRoutes");
 // middleware to use our routes
-app.use('/', routes);
+console.log(appRoutes);
+app.use("/patient", patientRoutes);
+app.use("/app", appRoutes);
 
 // export the app
 module.exports = app;
