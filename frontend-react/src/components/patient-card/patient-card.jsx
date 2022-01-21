@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import "./patient-card.scss";
 import { QRCode } from "react-qrcode-logo";
+import CriticalInfo from "./critical-info/critical-info";
+import PersonalInfo from "./personal-info/personal-info";
+import getRouteHandlerBaseUrl from "../../helpers/get-route-handler-base-url";
 
 const PatientCard = (props) => {
+  // const _baseUrl = getRouteHandlerBaseUrl(props);
+  d;
+  const frontendBaseUrl = "http://localhost:3001/";
   if (props.patient) {
-    const frontendBaseUrl = "http://localhost:3001/";
     const {
       _id,
       FirstName,
@@ -16,60 +21,18 @@ const PatientCard = (props) => {
       Medication,
     } = props.patient.data;
     return (
-      <div>
-        <div className="container">
-          <div className="row">
-            <div className="col-1">
-              <img src="../assets/images/avatar.png" alt="" />
-            </div>
-            <div className="col">
-              <h2 className="mt-4">{FirstName + " " + LastName}</h2>
-            </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-1">
+            <img src="../assets/images/avatar.png" alt="" />
           </div>
-          <div className="mt-5 patient-card-wrapper">
-            <div className="row patient-card-row">
-              <div className="col col-3">
-                <label>Blood Type</label>
-              </div>
-              <div className="col">
-                <label>{BloodType}</label>
-              </div>
-            </div>
-            <div className="row patient-card-row">
-              <div className="col col-3">
-                <label>Allergy / Reaction</label>
-              </div>
-              <div className="col">
-                <label>{Allergy}</label>
-              </div>
-            </div>
-            <div className="row patient-card-row">
-              <div className="col col-3">
-                <label>Active disease</label>
-              </div>
-              <div className="col">
-                <label>{ActiveDisease}</label>
-              </div>
-            </div>
-            <div className="row patient-card-row">
-              <div className="col col-3">
-                <label>Medicine</label>
-              </div>
-              <div className="col">
-                <label>{Medication}</label>
-              </div>
-            </div>
-            <div className="row patient-card-row">
-              <div className="col col-3">
-                <label>Known Issues</label>
-              </div>
-              <div className="col">
-                <label></label>
-              </div>
-            </div>
+          <div className="col">
+            <h2 className="mt-4">{FirstName + " " + LastName}</h2>
           </div>
         </div>
-        <div className="container">
+        <CriticalInfo patient={props.patient.data}></CriticalInfo>
+        <PersonalInfo patient={props.patient.data}></PersonalInfo>
+        <div className="container patient-card-nav">
           <ul className="list-group list-group-horizontal mt-3">
             <li className="list-group-item active">Critical Info</li>
             <li className="list-group-item">Personal Info</li>
