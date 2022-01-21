@@ -7,7 +7,7 @@ import getRouteHandlerBaseUrl from "../../helpers/get-route-handler-base-url";
 
 const PatientCard = (props) => {
   // const _baseUrl = getRouteHandlerBaseUrl(props);
-  d;
+
   const frontendBaseUrl = "http://localhost:3001/";
   if (props.patient) {
     const {

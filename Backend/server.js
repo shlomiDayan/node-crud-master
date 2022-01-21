@@ -24,6 +24,7 @@ const app = require("./app");
 
 // patient schema model
 require("./Models/Patient");
+require("./Models/Log");
 
 // start the server on port 3000
 const server = app.listen(3000, () => {

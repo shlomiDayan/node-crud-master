@@ -3,5 +3,8 @@ require("dotenv").config({ path: ".env" });
 
 // function to get patient on route "/getPatient"
 exports.getConfiguration = async (req, res) => {
-  res.json({ frontendBaseUrl: process.env.BASE_FRONTEND_URL });
+  res.json({
+    frontendBaseUrl: process.env.BASE_FRONTEND_URL,
+    serverBaseUrl: process.env.BASE_SERVER_URL,
+  });
 };

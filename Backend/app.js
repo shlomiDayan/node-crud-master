@@ -37,10 +37,12 @@ app.use((req, res, next) => {
 
 // import our routes
 const patientRoutes = require("./Routes/PatientRoutes");
+const logRoutes = require("./Routes/LogRoutes");
 const appRoutes = require("./Routes/AppRoutes");
 // middleware to use our routes
 console.log(appRoutes);
 app.use("/patient", patientRoutes);
+app.use("/log", logRoutes);
 app.use("/app", appRoutes);
 
 // export the app

@@ -2,6 +2,7 @@ import React, { Component, useEffect } from "react";
 import patientService from "../../services/patient.service.js";
 import { useParams } from "react-router-dom";
 import PatientCard from "../../components/patient-card/patient-card.jsx";
+import logService from "./../../services/log.service";
 
 const withRouter = (WrappedComponent) => (props) => {
   const params = useParams();
@@ -39,6 +40,15 @@ class Patient extends React.Component {
     patientService.getPatientById(id).then((res) => {
       let patient = res.data;
       this.setState({ patient: patient });
+      logService
+        .logClientActivity(patient.data)
+        .then((response) => {
+          console.log(
+            "🚀 ~ file: patient.jsx ~ line 46 ~ Patient ~ .then ~ response",
+            response.data
+          );
+        })
+        .catch((err) => {});
     });
   }
 
