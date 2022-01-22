@@ -8,7 +8,7 @@ const logService = {
     return axios.post(
       serverBaseUrl + "logClientActivity",
       {
-        PatientId: "123123321123",
+        PatientId: client._id,
         PatientName: client.FirstName + client.LastName,
         Created: new Date(),
       },

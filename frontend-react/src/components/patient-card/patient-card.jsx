@@ -1,12 +1,22 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import "./patient-card.scss";
 import { QRCode } from "react-qrcode-logo";
 import CriticalInfo from "./critical-info/critical-info";
 import PersonalInfo from "./personal-info/personal-info";
 import getRouteHandlerBaseUrl from "../../helpers/get-route-handler-base-url";
+import ContactInfo from "./contact-info/contact-info";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 
 const PatientCard = (props) => {
   // const _baseUrl = getRouteHandlerBaseUrl(props);
+  const [currentViewCard, setCurrentView] = useState("critical-info");
 
   const frontendBaseUrl = "http://localhost:3001/";
   if (props.patient) {
@@ -20,6 +30,16 @@ const PatientCard = (props) => {
       ActiveDisease,
       Medication,
     } = props.patient.data;
+
+    function onNavigationItemClick(e) {
+      console.log(
+        "🚀 ~ file: patient-card.jsx ~ line 35 ~ onNavigationItemClick ~ onNavigationItemClick currentViewCard =>",
+        currentViewCard
+      );
+      setCurrentView(e.target.id);
+      console.log("this is:", this);
+    }
+
     return (
       <div className="container">
         <div className="row">
@@ -30,15 +50,64 @@ const PatientCard = (props) => {
             <h2 className="mt-4">{FirstName + " " + LastName}</h2>
           </div>
         </div>
-        <CriticalInfo patient={props.patient.data}></CriticalInfo>
-        <PersonalInfo patient={props.patient.data}></PersonalInfo>
-        <div className="container patient-card-nav">
+        <div className="row patient-card-viewport">
+          {currentViewCard === "critical-info" && (
+            <CriticalInfo patient={props.patient.data}></CriticalInfo>
+          )}
+          {currentViewCard === "personal-info" && (
+            <PersonalInfo patient={props.patient.data}></PersonalInfo>
+          )}
+          {currentViewCard === "contact-info" && (
+            <ContactInfo patient={props.patient.data}></ContactInfo>
+          )}
+        </div>
+        <div className="row container patient-card-nav">
           <ul className="list-group list-group-horizontal mt-3">
-            <li className="list-group-item active">Critical Info</li>
-            <li className="list-group-item">Personal Info</li>
-            <li className="list-group-item">Contact</li>
-            <li className="list-group-item">Documents</li>
-            <li className="list-group-item">Notes</li>
+            <li
+              className={`list-group-item ${
+                currentViewCard === "critical-info" ? "active" : ""
+              }`}
+              id="critical-info"
+              onClick={(e) => onNavigationItemClick(e)}
+            >
+              Critical Info
+            </li>
+            <li
+              className={`list-group-item ${
+                currentViewCard === "personal-info" ? "active" : ""
+              }`}
+              id="personal-info"
+              onClick={(e) => onNavigationItemClick(e)}
+            >
+              Personal Info
+            </li>
+            <li
+              className={`list-group-item ${
+                currentViewCard === "contact-info" ? "active" : ""
+              }`}
+              id="contact-info"
+              onClick={(e) => onNavigationItemClick(e)}
+            >
+              Contact
+            </li>
+            <li
+              className={`list-group-item ${
+                currentViewCard === "documents-info" ? "active" : ""
+              }`}
+              id="documents-info"
+              onClick={(e) => onNavigationItemClick(e)}
+            >
+              Documents
+            </li>
+            <li
+              className={`list-group-item ${
+                currentViewCard === "notes" ? "active" : ""
+              }`}
+              id="notes"
+              onClick={(e) => onNavigationItemClick(e)}
+            >
+              Notes
+            </li>
           </ul>
         </div>
         <div className="text-center mt-5">

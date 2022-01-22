@@ -5,3 +5,17 @@
   border: 1px solid rgba(39, 41, 43, 0.1);
   font-weight: bold;
 }
+.patient-card-viewport {
+  min-height: 400px;
+}
+.patient-card-nav {
+  padding-left: 0;
+  ul {
+    li {
+      &:hover:not(.active) {
+        background-color: #ecf0f1;
+      }
+      cursor: pointer;
+    }
+  }
+}
