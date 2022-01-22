@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Backoffice from "./pages/backoffice/backoffice";
 import Home from "./pages/home/home";
 import Patient from "./pages/patient/patient";
+import PatientForm from "./pages/patient-form/patient-form";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path="/" element={<Login />} />
         <Route path="backoffice" element={<Backoffice />} />
         <Route path="home" element={<Home />} />
+        <Route path="patient" element={<PatientForm />} />
         {/* <Route exact path="patient/:id" element={<Patient />} /> */}
         <Route exact path="patient/:id" element={<Patient />} />
       </Routes>

@@ -110,8 +110,8 @@ const PatientCard = (props) => {
             </li>
           </ul>
         </div>
-        <div className="text-center mt-5">
-          <h2>Scan Me</h2>
+        <div className="text-center mt-5 border-1">
+          <h2>Enable Downlod for the QR </h2>
           <QRCode size="150" value={frontendBaseUrl + "/patient/" + _id} />
         </div>
       </div>

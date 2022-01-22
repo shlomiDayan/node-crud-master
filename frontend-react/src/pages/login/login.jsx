@@ -33,6 +33,8 @@ class Login extends React.Component {
     if (username && password) {
       if (username.toLowerCase() === "admin")
         this.setState({ redirect: "/backoffice" });
+      else if (username.toLowerCase() === "patient")
+        this.setState({ redirect: "/patient" });
       else this.setState({ redirect: "/home" });
     }
   }

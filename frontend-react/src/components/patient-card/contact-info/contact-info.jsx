@@ -37,26 +37,26 @@ const ContactInfo = (props) => {
           </div>
           <div className="row patient-card-row">
             <div className="col col-3">
-              <label>Active disease</label>
+              <label>Email</label>
             </div>
             <div className="col">
-              <label>{City}</label>
+              <label>{Email}</label>
             </div>
           </div>
           <div className="row patient-card-row">
             <div className="col col-3">
-              <label>Medicine</label>
+              <label>Relative Contact Name</label>
             </div>
             <div className="col">
-              <label>{City}</label>
+              <label>{RelativeContactName}</label>
             </div>
           </div>
           <div className="row patient-card-row">
             <div className="col col-3">
-              <label>Known Issues</label>
+              <label>Relative Phone</label>
             </div>
             <div className="col">
-              <label></label>
+              <label>{RelativeTelephone}</label>
             </div>
           </div>
         </div>
