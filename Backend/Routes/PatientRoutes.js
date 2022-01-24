@@ -4,9 +4,6 @@ const router = express.Router();
 // import the controller file for fcuntions
 const patientController = require("../Controllers/PatientController");
 
-// use
-router.get("/", patientController.baseRoute);
-
 // create
 router.post("/create", patientController.createPatient);
 
@@ -15,6 +12,7 @@ router.get("/getPatients", patientController.getPatients);
 
 // read one
 router.get("/getPatient/:id", patientController.getSinglePatient);
+router.get("/getPatientByEmail/:email", patientController.getPatientByEmail);
 
 // update
 router.put("/patient/:id/update", patientController.updatePatient);

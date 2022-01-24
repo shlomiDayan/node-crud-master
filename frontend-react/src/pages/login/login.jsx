@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Navigate } from "react-router-dom";
 import "./login.scss";
+import { Link } from "react-router-dom";
+import patientService from "./../../services/patient.service";
 
 class Login extends React.Component {
   constructor(props) {
@@ -24,18 +26,40 @@ class Login extends React.Component {
     this.setState({ [name]: value });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
+
+    //TODO: get logged in user by email from db
+    //get user by email ==> open patient form (enable edit)
+    //pass patient by URL to patient-form component
 
     this.setState({ submitted: true });
     // here we will check user type
     const { username, password } = this.state;
+
     if (username && password) {
       if (username.toLowerCase() === "admin")
         this.setState({ redirect: "/backoffice" });
-      else if (username.toLowerCase() === "patient")
-        this.setState({ redirect: "/patient" });
-      else this.setState({ redirect: "/home" });
+      else {
+        await patientService
+          .getPatientByEmail(username.toLowerCase())
+          .then((res) => {
+            if (res.status === 404) {
+              alert("Patient Not Found");
+              return;
+            }
+            let patient = res.data;
+            // this.setState({ patient: patient });
+            debugger;
+            this.setState({ redirect: "/patient-form/" + patient.data._id });
+          })
+          .catch((err) => {
+            console.log(
+              "🚀 ~ file: login.jsx ~ line 53 ~ Login ~ handleSubmit ~ err",
+              err
+            );
+          });
+      }
     }
   }
 
@@ -105,7 +129,9 @@ class Login extends React.Component {
                     {loggingIn && (
                       <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
                     )}
-                    {/* <Link to="/register" className="btn btn-link">Register</Link> */}
+                    <Link to="/patient-form" className="btn btn-link">
+                      Sign Up
+                    </Link>
                   </div>
                 </form>
               </div>

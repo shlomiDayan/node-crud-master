@@ -39,8 +39,9 @@ app.use((req, res, next) => {
 const patientRoutes = require("./Routes/PatientRoutes");
 const logRoutes = require("./Routes/LogRoutes");
 const appRoutes = require("./Routes/AppRoutes");
+
 // middleware to use our routes
-console.log(appRoutes);
+app.use("/", appRoutes);
 app.use("/patient", patientRoutes);
 app.use("/log", logRoutes);
 app.use("/app", appRoutes);

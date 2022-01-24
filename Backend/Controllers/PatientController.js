@@ -4,13 +4,6 @@ const Patient = require("../Models/Patient");
 // import and initiate the patients model to query the database
 const PatientModel = mongoose.model("patient");
 
-// function for base route on "/"
-exports.baseRoute = async (req, res) => {
-  res.send(
-    "<style>body{background-color:black;}}</style><h1 style='color:lightgreen'>Backend Server Running :: node.js</h1>"
-  );
-};
-
 // function to get patient on route "/getPatient"
 exports.getPatients = async (req, res) => {
   const patient = await PatientModel.find();
@@ -50,6 +43,35 @@ exports.getSinglePatient = async (req, res) => {
       console.log(data);
       res.status(200).json({
         message: "Paitent found",
+        data,
+      });
+    }
+  });
+};
+
+// function to get a single Paitent
+exports.getPatientByEmail = async (req, res) => {
+  // get id from URL by using req.params
+  let paitentEmail = req.params.email;
+  // we use mongodb's findById() functionality here
+  await PatientModel.findOne({ Email: paitentEmail }, (err, data) => {
+    if (err) {
+      res.status(500).json({
+        message: "Something went wrong, please try again later.",
+      });
+    } else if (data === null) {
+      console.log(
+        "🚀 ~ file: PatientController.js ~ line 63 ~ awaitPatientModel.findOne ~ data",
+        data
+      );
+
+      res.status(404).json({
+        message: "Paitent Not found",
+      });
+    } else {
+      console.log(data);
+      res.status(200).json({
+        message: "Paitent found by email",
         data,
       });
     }

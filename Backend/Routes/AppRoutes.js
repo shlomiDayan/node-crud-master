@@ -3,6 +3,8 @@ const express = require("express"); //import express
 const router = express.Router();
 // 2.
 const appController = require("../controllers/AppController");
+// use
+router.get("/", appController.baseRoute);
 // 3.
 router.get("/getConfiguration", appController.getConfiguration);
 // 4.

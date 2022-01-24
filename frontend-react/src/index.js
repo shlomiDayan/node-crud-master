@@ -17,7 +17,8 @@ ReactDOM.render(
         <Route path="/" element={<Login />} />
         <Route path="backoffice" element={<Backoffice />} />
         <Route path="home" element={<Home />} />
-        <Route path="patient" element={<PatientForm />} />
+        <Route path="patient-form" element={<PatientForm />} />
+        <Route path="patient-form/:id" element={<PatientForm />} />
         {/* <Route exact path="patient/:id" element={<Patient />} /> */}
         <Route exact path="patient/:id" element={<Patient />} />
       </Routes>

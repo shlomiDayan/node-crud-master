@@ -12,6 +12,15 @@ const patientService = {
     // we use axios to hit our api and get data
     return axios.get(serverBaseUrl + "getpatient/" + id);
   },
+  getPatientByEmail: function (email) {
+    console.log("🚀 ~ file: patient.service.js ~ line 16 ~ email", email);
+    // we use axios to hit our api and get data
+    return axios.get(serverBaseUrl + "getPatientByEmail/" + email, {
+      validateStatus: function (status) {
+        return status < 500; // Resolve only if the status code is less than 500
+      },
+    });
+  },
 };
 
 export default patientService;
