@@ -65,6 +65,7 @@ class PatientForm extends React.Component {
 
     return (
       <div>
+        <pre>{JSON.stringify(this.state.patient)}</pre>
         <div className="container">
           <div className="row">
             <div className="col">
