@@ -20,6 +20,14 @@ const patientService = {
         return status < 500; // Resolve only if the status code is less than 500
       },
     });
+  }, 
+   searchPatient: function (searchParams) {
+    // we use axios to hit our api and get data
+    return axios.get(serverBaseUrl + "searchPatient/" + searchParams, {
+      validateStatus: function (status) {
+        return status < 500; // Resolve only if the status code is less than 500
+      },
+    });
   },
 };
 

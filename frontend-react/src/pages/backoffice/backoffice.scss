@@ -30,3 +30,23 @@
   width: 110px;
   background: blue;
 }
+.bo-title {
+  text-transform: uppercase;
+}
+.dot {
+  height: 16px;
+  width: 16px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+.dot-active {
+  background-color: #2ecc71;
+}
+.search-button {
+  float: right;
+  position: absolute;
+  right: 30px;
+  top: 10px;
+}

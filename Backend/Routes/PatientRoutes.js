@@ -12,7 +12,10 @@ router.get("/getPatients", patientController.getPatients);
 
 // read one
 router.get("/getPatient/:id", patientController.getSinglePatient);
+
 router.get("/getPatientByEmail/:email", patientController.getPatientByEmail);
+
+router.get("/searchPatient/:searchParams", patientController.searchPatient);
 
 // update
 router.put("/patient/:id/update", patientController.updatePatient);

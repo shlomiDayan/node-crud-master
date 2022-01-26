@@ -48,7 +48,6 @@ exports.getSinglePatient = async (req, res) => {
     }
   });
 };
-
 // function to get a single Paitent
 exports.getPatientByEmail = async (req, res) => {
   // get id from URL by using req.params
@@ -76,6 +75,45 @@ exports.getPatientByEmail = async (req, res) => {
       });
     }
   });
+};
+
+// function to get a single Paitent
+exports.searchPatient = async (req, res) => {
+  // get id from URL by using req.params
+  let searchParams = req.params.searchParams;
+  // we use mongodb's findById() functionality here
+  await PatientModel.find(
+    {
+      $or: [
+        {
+          FirstName: { $regex: ".*" + searchParams + ".*", $options: "i" },
+        },
+        {
+          LastName: { $regex: ".*" + searchParams + ".*", $options: "i" },
+        },
+        {
+          SocialID: { $regex: ".*" + searchParams + ".*", $options: "i" },
+        },
+      ],
+    },
+    (err, data) => {
+      if (err) {
+        res.status(500).json({
+          message: "Something went wrong, please try again later.",
+        });
+      } else if (data === null || data.length === 0) {
+        res.status(404).json({
+          message: "Paitent Not found",
+        });
+      } else {
+        console.log(data);
+        res.status(200).json({
+          message: "Paitent found by email",
+          data,
+        });
+      }
+    }
+  );
 };
 
 // function to update a single Paitent
