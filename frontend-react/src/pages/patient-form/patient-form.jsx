@@ -7,7 +7,7 @@ import CriticalInfo from "../../components/patient-card/critical-info/critical-i
 import PersonalInfo from "../../components/patient-card/personal-info/personal-info";
 import getRouteHandlerBaseUrl from "../../helpers/get-route-handler-base-url";
 import ContactInfo from "../../components/patient-card/contact-info/contact-info";
-
+import PatientModel from "../../model/patient.model";
 const withRouter = (WrappedComponent) => (props) => {
   const params = useParams();
   // etc... other react-router-dom v6 hooks
@@ -28,7 +28,7 @@ class PatientForm extends React.Component {
     this.state = {
       data: null,
       patientId: null,
-      patient: null,
+      patient: PatientModel,
       isExistingUser: false,
     };
   }
@@ -58,6 +58,11 @@ class PatientForm extends React.Component {
     }
   }
 
+  handleChange(evt, field) {
+    // check it out: we get the evt.target.name (which will be either "email" or "password")
+    // and use it to target the key on our `state` object with the same name, using bracket syntax
+    this.setState({ patient: { [field]: evt.target.value } });
+  }
   // TODO: fill patient detail or edit if exist
   //TODO form validation
   render() {
@@ -76,6 +81,7 @@ class PatientForm extends React.Component {
                   className="form-control"
                   id="floatingInput"
                   placeholder="your name"
+                  onChange={(event) => this.handleChange(event, "FirstName")}
                 />
                 <label for="floatingInput">First Name</label>
               </div>
@@ -85,6 +91,7 @@ class PatientForm extends React.Component {
                   className="form-control"
                   id="floatingInput"
                   placeholder="your name"
+                  onChange={(event) => this.handleChange(event, "LastName")}
                 />
                 <label for="floatingInput">Last Name</label>
               </div>
@@ -94,6 +101,7 @@ class PatientForm extends React.Component {
                   className="form-control"
                   id="floatingInput"
                   placeholder="youremaol@gmail.com"
+                  onChange={(event) => this.handleChange(event, "Email")}
                 />
                 <label for="floatingInput">Email address</label>
               </div>
@@ -104,7 +112,7 @@ class PatientForm extends React.Component {
                   id="floatingInput"
                   placeholder="youremaol@gmail.com"
                 />
-                <label for="floatingInput">Email address</label>
+                <label for="floatingInput">Emaefrefil address</label>
               </div>
               <div className="form-floating">
                 <input
