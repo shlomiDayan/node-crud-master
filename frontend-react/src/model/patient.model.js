@@ -1,29 +1,29 @@
 class PatientModel {
   constructor() {
-    this.SocialID = undefined;
-    this.FirstName = undefined;
-    this.LastName = undefined;
-    this.status = undefined;
-    this.Gender = undefined;
-    this.BirthDate = undefined;
-    this.AdresssLine = undefined;
-    this.City = undefined;
-    this.Country = undefined;
-    this.PostalCode = undefined;
-    this.Telephone = undefined;
-    this.Email = undefined;
-    this.RelativeContactName = undefined;
-    this.RelativeTelephone = undefined;
-    this.RelativeEmail = undefined;
-    this.BloodType = undefined;
-    this.Medication = undefined;
-    this.Allergy = undefined;
-    this.ActiveDisease = undefined;
-    this.OldDisease = undefined;
-    this.immunization = undefined;
-    this.Photo = undefined;
-    this.DocURL = undefined;
-    this.Notes = undefined;
+    this.SocialID = null;
+    this.FirstName = null;
+    this.LastName = null;
+    this.status = "Active";
+    this.Gender = null;
+    this.BirthDate = null;
+    this.AdresssLine = null;
+    this.City = null;
+    this.Country = null;
+    this.PostalCode = null;
+    this.Telephone = null;
+    this.Email = null;
+    this.RelativeContactName = null;
+    this.RelativeTelephone = null;
+    this.RelativeEmail = null;
+    this.BloodType = null;
+    this.Medication = null;
+    this.Allergy = null;
+    this.ActiveDisease = null;
+    this.OldDisease = null;
+    this.immunization = null;
+    this.Photo = null;
+    this.DocURL = null;
+    this.Notes = null;
   }
 }
 
