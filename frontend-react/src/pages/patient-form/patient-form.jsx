@@ -173,6 +173,9 @@ class PatientForm extends React.Component {
               </div>
             </div>
           </div>
+          <div className="row">
+            <button className="btn btn-primary">Sign Up</button>
+          </div>
         </div>
       </div>
     );
