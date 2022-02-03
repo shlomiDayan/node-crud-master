@@ -13,6 +13,9 @@ const PaitentSchema = new mongoose.Schema({
   LastName: {
     type: String,
   },
+  PassportID: {
+    type: String,
+  },
   status: {
     type: String,
   },
@@ -64,6 +67,9 @@ const PaitentSchema = new mongoose.Schema({
   ActiveDisease: {
     type: String,
   },
+  Allergy: {
+    type: String,
+  },
   OldDisease: {
     type: String,
   },
@@ -78,6 +84,12 @@ const PaitentSchema = new mongoose.Schema({
   },
   Notes: {
     type: String,
+  },
+  CreatedDate: {
+    type: Date,
+  },
+  ModifiedDate: {
+    type: Date,
   },
 });
 

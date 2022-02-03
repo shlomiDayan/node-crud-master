@@ -1,6 +1,7 @@
 class PatientModel {
   constructor() {
     this.SocialID = null;
+    this.PassportID = null;
     this.FirstName = null;
     this.LastName = null;
     this.status = "Active";
@@ -24,6 +25,8 @@ class PatientModel {
     this.Photo = null;
     this.DocURL = null;
     this.Notes = null;
+    this.CreatedDate = new Date();
+    this.ModifiedDate = null;
   }
 }
 

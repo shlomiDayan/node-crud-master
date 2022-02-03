@@ -65,7 +65,15 @@ class PatientForm extends React.Component {
         });
     }
   }
+  //new patient
   onSignUpClick = () => {
+    this.setState((prevState, props) => ({
+      ...prevState,
+      patient: {
+        CreatedDate: new Date(),
+        ...prevState.patient,
+      },
+    }));
     patientService
       .createPatient(this.state.patient)
       .then((res) => {
@@ -73,7 +81,10 @@ class PatientForm extends React.Component {
       })
       .catch((err) => {});
   };
+  //existing patient
   onSaveChangesClick = () => {
+    this.state.patient.ModifiedDate = new Date();
+
     patientService
       .updatePatient(this.state.patient)
       .then((res) => {
@@ -98,14 +109,36 @@ class PatientForm extends React.Component {
   // TODO: fill patient detail or edit if exist
   //TODO form validation
   render() {
-    let p = this.state.patient;
-    const { isExistingUser } = this.state;
-    const { FirstName, LastName } = this.state.patient;
+    const { isExistingUser, patient } = this.state;
+    const {
+      FirstName,
+      LastName,
+      PassportID,
+      BirthDate,
+      Telephone,
+      Email,
+      AdresssLine,
+      City,
+      Country,
+      PostalCode,
+      RelativeContactName,
+      RelativeEmail,
+      BloodType,
+      Medication,
+      Allergy,
+      ActiveDisease,
+      OldDisease,
+      immunization,
+      Photo,
+      DocURL,
+      Notes,
+    } = this.state.patient;
     return (
       <div>
-        <pre>{JSON.stringify(this.state.patient)}</pre>
+        <pre>{JSON.stringify(patient)}</pre>
         <div className="container">
           <div className="row">
+            {/* #=> Personal Details */}
             <div className="col">
               <h4>Personal Details</h4>
               <div className="form-floating mb-2">
@@ -117,7 +150,7 @@ class PatientForm extends React.Component {
                   value={FirstName}
                   onChange={(event) => this.handleChange(event, "FirstName")}
                 />
-                <label for="floatingInput">First Name</label>
+                <label htmlFor="floatingInput">First Name</label>
               </div>
               <div className="form-floating mb-2">
                 <input
@@ -128,7 +161,29 @@ class PatientForm extends React.Component {
                   value={LastName || ""}
                   onChange={(event) => this.handleChange(event, "LastName")}
                 />
-                <label for="floatingInput">Last Name</label>
+                <label htmlFor="floatingInput">Last Name</label>
+              </div>
+              <div className="form-floating mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="0000000000"
+                  value={PassportID || ""}
+                  onChange={(event) => this.handleChange(event, "PassportID")}
+                />
+                <label htmlFor="floatingInput">Passport Number</label>
+              </div>
+              <div className="form-floating mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="DD/MM/YYYY"
+                  value={BirthDate || ""}
+                  onChange={(event) => this.handleChange(event, "BirthDate")}
+                />
+                <label htmlFor="floatingInput">Birth Date</label>
               </div>
               <div className="form-floating mb-2">
                 <input
@@ -136,75 +191,80 @@ class PatientForm extends React.Component {
                   className="form-control"
                   id="floatingInput"
                   placeholder="youremaol@gmail.com"
+                  value={Email || ""}
                   onChange={(event) => this.handleChange(event, "Email")}
                 />
-                <label for="floatingInput">Email address</label>
+                <label htmlFor="floatingInput">Email address</label>
               </div>
               <div className="form-floating mb-2">
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
                   id="floatingInput"
-                  placeholder="youremaol@gmail.com"
+                  placeholder="your phone"
+                  value={Telephone || ""}
+                  onChange={(event) => this.handleChange(event, "Telephone")}
                 />
-                <label for="floatingInput">Emaefrefil address</label>
+                <label htmlFor="floatingInput">Phone</label>
               </div>
-              <div className="form-floating">
+              <div className="form-floating mb-2">
                 <input
-                  type="password"
+                  type="text"
                   className="form-control"
-                  id="floatingPassword"
-                  placeholder="Password"
+                  id="floatingInput"
+                  placeholder="DD/MM/YYYY"
+                  value={AdresssLine || ""}
+                  onChange={(event) => this.handleChange(event, "AdresssLine")}
                 />
-                <label for="floatingPassword">Password</label>
+                <label htmlFor="floatingInput">Address</label>
               </div>
-            </div>{" "}
+              <div className="form-floating mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="City"
+                  value={City || ""}
+                  onChange={(event) => this.handleChange(event, "City")}
+                />
+                <label htmlFor="floatingInput">City</label>
+              </div>
+              <div className="form-floating mb-2">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="floatingInput"
+                  placeholder="Country"
+                  value={Country || ""}
+                  onChange={(event) => this.handleChange(event, "Country")}
+                />
+                <label htmlFor="floatingInput">Country</label>
+              </div>
+            </div>
+            {/* #=> Medical Information */}
             <div className="col">
-              <h4>Personal Details</h4>
+              <h4>Medical Information</h4>
               <div className="form-floating mb-2">
                 <input
                   type="text"
                   className="form-control"
                   id="floatingInput"
-                  placeholder="your name"
+                  placeholder="Country"
+                  value={BloodType || ""}
+                  onChange={(event) => this.handleChange(event, "BloodType")}
                 />
-                <label for="floatingInput">First Name</label>
+                <label htmlFor="floatingInput">Blood Type</label>
               </div>
               <div className="form-floating mb-2">
                 <input
                   type="text"
                   className="form-control"
                   id="floatingInput"
-                  placeholder="your name"
+                  placeholder="Country"
+                  value={Allergy || ""}
+                  onChange={(event) => this.handleChange(event, "Allergy")}
                 />
-                <label for="floatingInput">Last Name</label>
-              </div>
-              <div className="form-floating mb-2">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="youremaol@gmail.com"
-                />
-                <label for="floatingInput">Email address</label>
-              </div>
-              <div className="form-floating mb-2">
-                <input
-                  type="email"
-                  className="form-control"
-                  id="floatingInput"
-                  placeholder="youremaol@gmail.com"
-                />
-                <label for="floatingInput">Email address</label>
-              </div>
-              <div className="form-floating">
-                <input
-                  type="password"
-                  className="form-control"
-                  id="floatingPassword"
-                  placeholder="Password"
-                />
-                <label for="floatingPassword">Password</label>
+                <label htmlFor="floatingInput">Allergy</label>
               </div>
             </div>
           </div>
