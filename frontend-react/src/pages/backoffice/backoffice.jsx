@@ -21,10 +21,19 @@ const columns = [
     ),
   },
   {
-    field: "SocialID",
-    headerName: "Social ID",
-    width: 150,
-    editable: true,
+    field: "Photo",
+    headerName: "",
+    width: 70,
+    renderCell: (params) => (
+      <img
+        className="grid-photo"
+        src={
+          params.value !== null && params.value !== ""
+            ? params.value
+            : "../assets/images/avatar.png"
+        }
+      />
+    ),
   },
   {
     field: "FirstName",
@@ -35,6 +44,12 @@ const columns = [
   {
     field: "LastName",
     headerName: "Last name",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "SocialID",
+    headerName: "Social ID",
     width: 150,
     editable: true,
   },
@@ -166,6 +181,10 @@ class Backoffice extends Component {
             disableSelectionOnClick
           />
         </div>
+
+        <h4 className="debug">
+          TODO: Add edit button in grid that links to edit mode in user form
+        </h4>
       </div>
     );
   }

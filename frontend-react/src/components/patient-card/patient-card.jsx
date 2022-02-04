@@ -24,6 +24,7 @@ const PatientCard = (props) => {
       _id,
       FirstName,
       LastName,
+      Photo,
       SocialID,
       BloodType,
       Allergy,
@@ -44,7 +45,15 @@ const PatientCard = (props) => {
       <div className="container">
         <div className="row">
           <div className="col-1">
-            <img src="../assets/images/avatar.png" alt="" />
+            <img
+              className="card-profile-photo"
+              src={
+                Photo !== null && Photo !== ""
+                  ? Photo
+                  : "../assets/images/avatar.png"
+              }
+              alt=""
+            />
           </div>
           <div className="col">
             <h2 className="mt-4">{FirstName + " " + LastName}</h2>

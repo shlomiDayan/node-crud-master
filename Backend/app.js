@@ -15,11 +15,11 @@ const logger = require("morgan");
 app.use(logger("dev"));
 
 // body parsers
+app.use(bodyParser.json({ limit: "200mb" }));
+app.use(bodyParser.urlencoded({ limit: "200mb", extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.urlencoded({ extended: true }));
 
 // CORS
 app.use((req, res, next) => {

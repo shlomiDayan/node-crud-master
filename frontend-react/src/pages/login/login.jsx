@@ -50,7 +50,7 @@ class Login extends React.Component {
             }
             let patient = res.data;
             // this.setState({ patient: patient });
-            debugger;
+
             this.setState({ redirect: `/patient-form/${patient.data._id}` });
           })
           .catch((err) => {

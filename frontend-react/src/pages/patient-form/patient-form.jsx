@@ -8,6 +8,10 @@ import PersonalInfo from "../../components/patient-card/personal-info/personal-i
 import getRouteHandlerBaseUrl from "../../helpers/get-route-handler-base-url";
 import ContactInfo from "../../components/patient-card/contact-info/contact-info";
 import PatientModel from "../../model/patient.model";
+import ImageUploader from "react-images-upload";
+
+import "./patient-form.scss";
+
 const withRouter = (WrappedComponent) => (props) => {
   const params = useParams();
   // etc... other react-router-dom v6 hooks
@@ -30,9 +34,20 @@ class PatientForm extends React.Component {
       patientId: null,
       patient: PatientModel,
       isExistingUser: false,
+      pictures: [],
     };
+
+    this.onDrop = this.onDrop.bind(this);
   }
 
+  onDrop(pictureFiles, pictureDataURLs) {
+    if (pictureDataURLs.length > 0) {
+      this.state.patient.Photo = pictureDataURLs[0];
+      this.setState({
+        pictures: pictureFiles,
+      });
+    }
+  }
   componentDidMount() {
     document.title = document.title + " - Patient Form";
     if (this.props.params.id) {
@@ -140,8 +155,19 @@ class PatientForm extends React.Component {
           <div className="row">
             {/* #=> Personal Details */}
             <div className="col">
-              <h4>Personal Details</h4>
-              <div className="form-floating mb-2">
+              <h4 className="section-header">
+                Personal Details{" "}
+                <img
+                  src={
+                    Photo !== null && Photo !== ""
+                      ? Photo
+                      : "../assets/images/avatar.png"
+                  }
+                  alt=""
+                  className="float-end header-profile-img"
+                />
+              </h4>
+              <div className="form-floating mb-2 personal-details-section">
                 <input
                   type="text"
                   className="form-control"
@@ -240,10 +266,22 @@ class PatientForm extends React.Component {
                 />
                 <label htmlFor="floatingInput">Country</label>
               </div>
+              <div>
+                <ImageUploader
+                  withIcon={false}
+                  buttonText="Upload Image"
+                  onChange={this.onDrop}
+                  imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+                  maxFileSize={5242880}
+                  withPreview={true}
+                  singleImage={true}
+                  buttonClassName="btn-img-upload"
+                />
+              </div>
             </div>
-            {/* #=> Medical Information */}
+            {/* //#region => Medical Information */}
             <div className="col">
-              <h4>Medical Information</h4>
+              <h4 className="section-header">Medical Information</h4>
               <div className="form-floating mb-2">
                 <input
                   type="text"
@@ -267,6 +305,7 @@ class PatientForm extends React.Component {
                 <label htmlFor="floatingInput">Allergy</label>
               </div>
             </div>
+            {/* //#endregion */}
           </div>
           <div className="row mt-4">
             <div className="col"></div>
