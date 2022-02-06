@@ -1,10 +1,26 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+//material ui
 import { DataGrid } from "@mui/x-data-grid";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import Switch from "@mui/material/Switch";
+
 import { QRCode } from "react-qrcode-logo";
 import { Link } from "react-router-dom";
 import "./backoffice.scss";
 import patientService from "./../../services/patient.service";
 import * as Icon from "react-bootstrap-icons";
+import PatientForm from "../patient-form/patient-form";
 
 const columns = [
   {
@@ -92,6 +108,8 @@ class Backoffice extends Component {
     this.state = {
       data: null,
       searchParams: "",
+      loading: true,
+      open: false,
     };
   }
 
@@ -109,14 +127,17 @@ class Backoffice extends Component {
   };
 
   getAllPatients() {
+    this.setState({ loading: true });
     patientService.getPatients().then((res) => {
       let patients = res.data;
       this.setState({ data: patients });
+      this.setState({ loading: false });
     });
   }
 
   searchPatient() {
     if (this.state.searchParams === "") return;
+    this.setState({ loading: true });
     patientService.searchPatient(this.state.searchParams).then((res) => {
       if (res.status === 404)
         this.setState({
@@ -126,9 +147,20 @@ class Backoffice extends Component {
         let patients = res.data.data;
         this.setState({ data: patients });
       }
+
+      this.setState({ loading: false });
     });
   }
-
+  onCreatePatientClick = () => {
+    //open modal
+    this.setState({ open: true });
+  };
+  handlePatinetModalClose = () => {
+    this.setState({ open: false });
+  };
+  onGridRefreshClick = () => {
+    this.getAllPatients();
+  };
   updateSearchParams(evt) {
     const val = evt.target.value;
     // ...
@@ -144,10 +176,13 @@ class Backoffice extends Component {
       this.searchPatient();
     }
   };
+
   render() {
     return (
       <div className="main-wrapper container">
-        <h1 className="pb-4 pt-2 bo-title">MediCard Backoffice</h1>
+        <h1 className="pb-4 pt-2 bo-title">
+          <span></span>MediCard Backoffice
+        </h1>
         {/* <pre>{JSON.stringify(this.state.data)}</pre> */}
 
         <div className="search-wrapper">
@@ -170,12 +205,41 @@ class Backoffice extends Component {
             </div>
           </div>
         </div>
-        <div style={{ height: 500, width: "100%" }}>
+        <Dialog
+          fullWidth={true}
+          maxWidth={"xl"}
+          open={this.state.open}
+          onClose={this.handlePatinetModalClose}
+        >
+          <DialogTitle>Create New Patient</DialogTitle>
+          <DialogContent>
+            <PatientForm></PatientForm>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handlePatinetModalClose}>Close</Button>
+          </DialogActions>
+        </Dialog>
+        <div className="grid-buttons-wrapper clearfix mb-2">
+          <button
+            className="btn btn-primary float-end"
+            onClick={this.onCreatePatientClick}
+          >
+            Create Patient
+          </button>
+          <button
+            className="btn btn-secondary float-end"
+            onClick={this.onGridRefreshClick}
+          >
+            Refresh
+          </button>
+        </div>
+        <div style={{ height: 500, width: "100%" }} className="">
           <DataGrid
+            loading={this.state.loading}
             getRowId={(r) => r._id}
             rows={this.state.data ? this.state.data : []}
             columns={columns}
-            pageSize={5}
+            pageSize={10}
             rowsPerPageOptions={[10]}
             // checkboxSelection
             disableSelectionOnClick
